@@ -102,11 +102,20 @@ State <- sapply(Temp_arrest_city, FUN=function(x) x[2])
 Arrest2 <- as.data.frame(cbind(Arrest,State,City))
 Arrest2 <- Arrest2[,c(1,3,6:7)]
 
+for (i in 1 : nrow(Arrest2))
+{
+    if ( is.na( Arrest2[i,1] ) == TRUE)
+    {
+     Arrest2[i,1]=Arrest2[i-1,1]   
+    }
+}
 # Some errors here
 Arrest4 <- Arrest2[order(Arrest2[,4],Arrest2[,1]), ]
 Arrest3 <- merge(Arrest2, State_City_Metro[1:2], by="City", all.x=F, all.y=F)
 
 
+which(duplicated(Arrest3[,1:3]))
+Arrest3[which(duplicated(Arrest3[,1:3])),]
 
 
 
